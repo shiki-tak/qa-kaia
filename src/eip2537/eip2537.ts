@@ -280,7 +280,7 @@ async function main() {
     console.log(`Total tests passed: ${totalPassed}`);
     console.log(`Total tests failed: ${totalFailed}`);
 
-    const resultDir = path.join(__dirname, '..', 'results');
+    const resultDir = path.join(__dirname, '.', 'results');
     
     if (!fs.existsSync(resultDir)) {
         fs.mkdirSync(resultDir, { recursive: true });
