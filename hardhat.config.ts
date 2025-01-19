@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 
 export const env = dotenv.config().parsed;
 
-const defaultKey = "0x902a2f54f1e7b83433b60e09358898361a54150628528787be3d4df9f1374c49";
+const defaultKey = "0xf9b05b76729d92d6fb763840c6b5997000a84b845962510d41a128311f2a9c3c";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -60,6 +60,10 @@ const config: HardhatUserConfig = {
         passphrase: "",
       },
     },
+  },
+  paths: {
+    sources: "./src/",
+    deployments: "deployments",
   },
 };
 

@@ -23,7 +23,13 @@
   },
   "dependencies": {
     "@kaiachain/ethers-ext": "^1.1.1",
+    "@kaiachain/web3js-ext": "^1.1.1",
     "@openzeppelin/contracts": "^5.0.2",
-    "dotenv": "^16.4.7"
+    "canvas": "^3.0.1",
+    "caver-js": "^1.12.2",
+    "chart.js": "^4.4.7",
+    "dotenv": "^16.4.7",
+    "ethers": "^6.13.5",
+    "solc": "^0.8.28"
   }
 }

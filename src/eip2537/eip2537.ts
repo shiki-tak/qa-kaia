@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 import * as dotenv from "dotenv";
-import { EIP2537 } from "../typechain-types";
+import { EIP2537 } from "../../typechain-types";
 import { expect } from "chai";
 import * as fs from 'fs';
 import * as path from 'path';
@@ -198,7 +198,7 @@ async function runTests(
     let passedTests = 0;
     let failedTests = 0;
     
-    const successFilePath = path.join(__dirname, '../testdata/eip2537', functionInfo.successJsonFile);
+    const successFilePath = path.join(__dirname, './testdata', functionInfo.successJsonFile);
     try {
         const successJsonData = fs.readFileSync(successFilePath, 'utf8');
         const successTests: SuccessTestCase[] = JSON.parse(successJsonData);
@@ -219,7 +219,7 @@ async function runTests(
         console.error(`Error reading success test cases:`, error);
     }
 
-    const failureFilePath = path.join(__dirname, '../testdata/eip2537', functionInfo.failureJsonFile);
+    const failureFilePath = path.join(__dirname, './testdata', functionInfo.failureJsonFile);
     try {
         const failureJsonData = fs.readFileSync(failureFilePath, 'utf8');
         const failureTests: FailureTestCase[] = JSON.parse(failureJsonData);

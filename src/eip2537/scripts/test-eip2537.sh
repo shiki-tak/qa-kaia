@@ -17,14 +17,14 @@ echo "Compiling contracts..."
 npx hardhat compile
 
 echo "Deploying contract..."
-DEPLOY_OUTPUT=$(npx hardhat run src/deploy.ts --network homi)
+DEPLOY_OUTPUT=$(npx hardhat run deploy.ts --network homi)
 
 export CONTRACT_ADDRESS=$(echo $DEPLOY_OUTPUT | jq -r '.contractAddress')
 
 echo "Contract deployed at: $CONTRACT_ADDRESS"
 echo "Running tests..."
 
-npx hardhat run src/eip2537.ts --network homi
+npx hardhat run eip2537.ts --network homi
 
 EXIT_CODE=$?
 
