@@ -1,0 +1,4 @@
+module.exports = {
+  "testnet": "0x377a8f0440459f6b4035101B9F473a0a216B1809",
+  "local": "0xf00f1aA17AD9F007fe268BfA1B27794b00FC1692"
+};
