@@ -1,11 +1,11 @@
 const Caver = require('caver-js');
 require('dotenv').config();
-const fs = require('fs');
-const { createCanvas } = require('canvas');
 const path = require('path');
-const Chart = require('chart.js/auto');
+const fs = require('fs');
 const CONTRACT_BYTECODES = require('./contract-bytecodes');
 const deployedAddresses = require('./deployed-addresses');
+const { processResults } = require('./gas-validation');
+const { saveChartAsImage } = require('./save-image');
 
 class KaiaTransactionAnalyzer {
   constructor(config) {
@@ -312,7 +312,6 @@ class KaiaTransactionAnalyzer {
             ...baseParams,
             to: randomAddress,
             input: dummyData.memo,
-            accessList: dummyData.accessList
           });
 
         default:
@@ -427,126 +426,6 @@ class KaiaTransactionAnalyzer {
   }
 }
 
-async function saveChartAsImage(data, filename) {
-  const canvas = createCanvas(1200, 800);
-  const ctx = canvas.getContext('2d');
-
-  const dataSizes = [...new Set(data.map(d => d.dataSize))].sort((a, b) => a - b);
-  const testnetData = new Map();
-  const localData = new Map();
-
-  data.forEach(result => {
-    if (result.success) {
-      const gasUsed = parseInt(result.gasUsed, 16);
-      if (result.networkName === 'testnet') {
-        if (!testnetData.has(result.dataSize)) {
-          testnetData.set(result.dataSize, []);
-        }
-        testnetData.get(result.dataSize).push(gasUsed);
-      } else {
-        if (!localData.has(result.dataSize)) {
-          localData.set(result.dataSize, []);
-        }
-        localData.get(result.dataSize).push(gasUsed);
-      }
-    }
-  });
-
-  const testnetAverages = dataSizes.map(size => {
-    const values = testnetData.get(size) || [];
-    return values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
-  });
-
-  const localAverages = dataSizes.map(size => {
-    const values = localData.get(size) || [];
-    return values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
-  });
-
-  const chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: dataSizes,
-      datasets: [
-        {
-          label: 'Testnet (EIP-2028 Not Applied)',
-          data: testnetAverages,
-          borderColor: 'rgb(75, 192, 192)',
-          backgroundColor: 'rgba(75, 192, 192, 0.5)',
-          tension: 0.1,
-          pointStyle: 'circle',
-          pointRadius: 6,
-          pointBorderColor: 'rgb(75, 192, 192)',
-          pointBackgroundColor: 'rgba(75, 192, 192, 0.5)',
-          borderDash: [5, 5] // Add a dashed line for testnet
-        },
-        {
-          label: 'Local (EIP-2028 Applied)',
-          data: localAverages,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-          tension: 0.1,
-          pointStyle: 'triangle',
-          pointRadius: 6,
-          pointBorderColor: 'rgb(255, 99, 132)',
-          pointBackgroundColor: 'rgba(255, 99, 132, 0.5)'
-        }
-      ]
-    },
-    options: {
-      responsive: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'EIP-2028 Gas Cost Comparison',
-          font: {
-            size: 16
-          }
-        },
-        legend: {
-          position: 'top',
-        },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              const datasetLabel = context.dataset.label || '';
-              const dataPoint = context.parsed.y;
-              return `${datasetLabel}: ${dataPoint.toFixed(2)} gas`;
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Data Size (bytes)'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Gas Used'
-          },
-          beginAtZero: true,
-          ticks: {
-            callback: function(value) {
-              return value.toLocaleString(); // Add comma separators to y-axis labels
-            }
-          }
-        }
-      },
-      interaction: {
-        mode: 'nearest',
-        intersect: false
-      }
-    }
-  });
-
-  const buffer = canvas.toBuffer('image/png');
-  fs.writeFileSync(filename, buffer);
-  console.log(`Chart saved as ${filename}`);
-}
-
 async function main() {
   const configs = [
     {
@@ -566,30 +445,30 @@ async function main() {
   ];
  
   const analyzers = configs.map(config => new KaiaTransactionAnalyzer(config));
-  const iterations = 3;
+  const iterations = 1;
   const dataSizes = [32, 64, 128, 256, 512, 1024];
   const txTypes = [
     'legacyTransaction',
-    'valueTransfer',
-    'valueTransferMemo',
-    'smartContractDeploy',
-    'smartContractExecution',
-    'accountUpdate',
-    'cancel',
-    'feeDelegatedValueTransfer',
-    'feeDelegatedValueTransferMemo',
-    'feeDelegatedValueTransferWithRatio',
-    'feeDelegatedValueTransferMemoWithRatio',
-    'feeDelegatedSmartContractDeploy',
-    'feeDelegatedSmartContractDeployWithRatio',
-    'feeDelegatedSmartContractExecution',
-    'feeDelegatedSmartContractExecutionWithRatio',
-    'feeDelegatedAccountUpdate',
-    'feeDelegatedAccountUpdateWithRatio',
-    'feeDelegatedCancel',
-    'feeDelegatedCancelWithRatio',
-    'ethereumAccessList',
-    'ethereumDynamicFee'
+    // 'valueTransfer',
+    // 'valueTransferMemo',
+    // 'smartContractDeploy',
+    // 'smartContractExecution',
+    // 'accountUpdate',
+    // 'cancel',
+    // 'feeDelegatedValueTransfer',
+    // 'feeDelegatedValueTransferMemo',
+    // 'feeDelegatedValueTransferWithRatio',
+    // 'feeDelegatedValueTransferMemoWithRatio',
+    // 'feeDelegatedSmartContractDeploy',
+    // 'feeDelegatedSmartContractDeployWithRatio',
+    // 'feeDelegatedSmartContractExecution',
+    // 'feeDelegatedSmartContractExecutionWithRatio',
+    // 'feeDelegatedAccountUpdate',
+    // 'feeDelegatedAccountUpdateWithRatio',
+    // 'feeDelegatedCancel',
+    // 'feeDelegatedCancelWithRatio',
+    // 'ethereumAccessList',
+    // 'ethereumDynamicFee'
   ];
   
   const allResults = [];
@@ -642,37 +521,24 @@ async function main() {
     }
   });
  
-  console.log("\n=== EIP-2028 Analysis Summary ===");
-  resultsByNetwork.forEach((results, networkName) => {
-    console.log(`\n${networkName}:`);
-    results.forEach((data, dataSize) => {
-      console.log(`\nData Size: ${dataSize} bytes`);
-      console.log(`Average Gas Used: ${Math.round(data.avgGasUsed / data.count)}`);
-      console.log(`Average Gas per Byte: ${(data.gasPerByte / data.count).toFixed(2)}`);
-      console.log(`Average Total Cost: ${(data.avgTotalCost / data.count).toFixed(6)} KAIA`);
-    });
-  });
- 
   const uniqueTxTypes = [...new Set(allResults.map(r => r.txType))];
+  processResults(allResults);
   for (const txType of uniqueTxTypes) {
-    const timestamp = new Date().toISOString().split('T')[0];
-    const graphFileName = `result-${txType}-${timestamp}.png`;
+    const txTypeDir = path.join('../results', txType);
+    if (!fs.existsSync(txTypeDir)) {
+      fs.mkdirSync(txTypeDir, { recursive: true });
+    }
     
+    const graphFileName = 'gas-comparison.png';
     const txResults = allResults.filter(result => result.txType === txType);
-    await saveChartAsImage(txResults, path.join('../results', graphFileName));
+    await saveChartAsImage(txResults, path.join(txTypeDir, graphFileName));
     
     console.log(`Generated graph for ${txType}: ${graphFileName}`);
   }
- }
+}
  
- if (require.main === module) {
-  main().catch(console.error);
- }
- 
- module.exports = KaiaTransactionAnalyzer;
-
 if (require.main === module) {
   main().catch(console.error);
 }
-
-module.exports = KaiaTransactionAnalyzer;
+ 
+ module.exports = KaiaTransactionAnalyzer;

@@ -1,0 +1,39 @@
+=== Gas Validation Results ===
+
+feeDelegatedSmartContractDeployWithRatio:
+
+Data Size: 32 bytes
+Expected: 161743
+Actual: 161743
+Difference: 0
+Gas validation: PASS
+
+Data Size: 64 bytes
+Expected: 162979
+Actual: 162979
+Difference: 0
+Gas validation: PASS
+
+Data Size: 128 bytes
+Expected: 176819
+Actual: 176819
+Difference: 0
+Gas validation: PASS
+
+Data Size: 256 bytes
+Expected: 205759
+Actual: 205759
+Difference: 0
+Gas validation: PASS
+
+Data Size: 512 bytes
+Expected: 261120
+Actual: 261120
+Difference: 0
+Gas validation: PASS
+
+Data Size: 1024 bytes
+Expected: 371842
+Actual: 371842
+Difference: 0
+Gas validation: PASS

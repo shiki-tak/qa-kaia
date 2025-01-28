@@ -1,0 +1,39 @@
+=== Gas Validation Results ===
+
+ethereumDynamicFee:
+
+Data Size: 32 bytes
+Expected: 22280
+Actual: 22280
+Difference: 0
+Gas validation: PASS
+
+Data Size: 64 bytes
+Expected: 23560
+Actual: 23560
+Difference: 0
+Gas validation: PASS
+
+Data Size: 128 bytes
+Expected: 26120
+Actual: 26120
+Difference: 0
+Gas validation: PASS
+
+Data Size: 256 bytes
+Expected: 31240
+Actual: 31240
+Difference: 0
+Gas validation: PASS
+
+Data Size: 512 bytes
+Expected: 41480
+Actual: 41480
+Difference: 0
+Gas validation: PASS
+
+Data Size: 1024 bytes
+Expected: 61960
+Actual: 61960
+Difference: 0
+Gas validation: PASS

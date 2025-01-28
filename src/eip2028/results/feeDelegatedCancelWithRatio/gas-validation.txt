@@ -1,0 +1,39 @@
+=== Gas Validation Results ===
+
+feeDelegatedCancelWithRatio:
+
+Data Size: 32 bytes
+Expected: 36000
+Actual: 36000
+Difference: 0
+Gas validation: PASS
+
+Data Size: 64 bytes
+Expected: 36000
+Actual: 36000
+Difference: 0
+Gas validation: PASS
+
+Data Size: 128 bytes
+Expected: 36000
+Actual: 36000
+Difference: 0
+Gas validation: PASS
+
+Data Size: 256 bytes
+Expected: 36000
+Actual: 36000
+Difference: 0
+Gas validation: PASS
+
+Data Size: 512 bytes
+Expected: 36000
+Actual: 36000
+Difference: 0
+Gas validation: PASS
+
+Data Size: 1024 bytes
+Expected: 36000
+Actual: 36000
+Difference: 0
+Gas validation: PASS

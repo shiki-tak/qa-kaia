@@ -1,0 +1,39 @@
+=== Gas Validation Results ===
+
+ethereumAccessList:
+
+Data Size: 32 bytes
+Expected: 27712
+Actual: 27712
+Difference: 0
+Gas validation: PASS
+
+Data Size: 64 bytes
+Expected: 28224
+Actual: 28224
+Difference: 0
+Gas validation: PASS
+
+Data Size: 128 bytes
+Expected: 29248
+Actual: 29248
+Difference: 0
+Gas validation: PASS
+
+Data Size: 256 bytes
+Expected: 31296
+Actual: 31296
+Difference: 0
+Gas validation: PASS
+
+Data Size: 512 bytes
+Expected: 41480
+Actual: 41480
+Difference: 0
+Gas validation: PASS
+
+Data Size: 1024 bytes
+Expected: 61960
+Actual: 61960
+Difference: 0
+Gas validation: PASS

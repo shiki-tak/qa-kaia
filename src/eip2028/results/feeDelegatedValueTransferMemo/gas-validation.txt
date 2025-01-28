@@ -1,0 +1,39 @@
+=== Gas Validation Results ===
+
+feeDelegatedValueTransferMemo:
+
+Data Size: 32 bytes
+Expected: 31512
+Actual: 31512
+Difference: 0
+Gas validation: PASS
+
+Data Size: 64 bytes
+Expected: 32024
+Actual: 32024
+Difference: 0
+Gas validation: PASS
+
+Data Size: 128 bytes
+Expected: 33048
+Actual: 33048
+Difference: 0
+Gas validation: PASS
+
+Data Size: 256 bytes
+Expected: 35096
+Actual: 35096
+Difference: 0
+Gas validation: PASS
+
+Data Size: 512 bytes
+Expected: 41480
+Actual: 41480
+Difference: 0
+Gas validation: PASS
+
+Data Size: 1024 bytes
+Expected: 61960
+Actual: 61960
+Difference: 0
+Gas validation: PASS
