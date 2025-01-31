@@ -34,12 +34,6 @@ const testFunctions: TestFunction[] = [
         failureJsonFile: "fail-blsG1Add.json"
     },
     { 
-        name: "G1 Mul", 
-        contractMethod: "bls12381G1Mul", 
-        successJsonFile: "blsG1Mul.json",
-        failureJsonFile: "fail-blsG1Mul.json"
-    },
-    { 
         name: "G1 MultiExp", 
         contractMethod: "bls12381G1MultiExp", 
         successJsonFile: "blsG1MultiExp.json",
@@ -50,12 +44,6 @@ const testFunctions: TestFunction[] = [
         contractMethod: "bls12381G2Add", 
         successJsonFile: "blsG2Add.json",
         failureJsonFile: "fail-blsG2Add.json"
-    },
-    { 
-        name: "G2 Mul", 
-        contractMethod: "bls12381G2Mul", 
-        successJsonFile: "blsG2Mul.json",
-        failureJsonFile: "fail-blsG2Mul.json"
     },
     { 
         name: "G2 MultiExp", 

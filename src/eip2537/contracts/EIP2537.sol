@@ -37,7 +37,7 @@ contract EIP2537 {
         return callPrecompile(address(0x0b), finalInput);
     }
 
-    function bls12381G1Mul(bytes memory input) public returns (bytes memory) {
+    function bls12381G1MultiExp(bytes memory input) public returns (bytes memory) {
         bytes memory finalInput;
         if (pendingInputs[msg.sender].length > 0) {
             finalInput = pendingInputs[msg.sender];
@@ -48,7 +48,7 @@ contract EIP2537 {
         return callPrecompile(address(0x0c), finalInput);
     }
 
-    function bls12381G1MultiExp(bytes memory input) public returns (bytes memory) {
+    function bls12381G2Add(bytes memory input) public returns (bytes memory) {
         bytes memory finalInput;
         if (pendingInputs[msg.sender].length > 0) {
             finalInput = pendingInputs[msg.sender];
@@ -59,28 +59,6 @@ contract EIP2537 {
         return callPrecompile(address(0x0d), finalInput);
     }
 
-    function bls12381G2Add(bytes memory input) public returns (bytes memory) {
-        bytes memory finalInput;
-        if (pendingInputs[msg.sender].length > 0) {
-            finalInput = pendingInputs[msg.sender];
-            delete pendingInputs[msg.sender];
-        } else {
-            finalInput = input;
-        }
-        return callPrecompile(address(0x0e), finalInput);
-    }
-
-    function bls12381G2Mul(bytes memory input) public returns (bytes memory) {
-        bytes memory finalInput;
-        if (pendingInputs[msg.sender].length > 0) {
-            finalInput = pendingInputs[msg.sender];
-            delete pendingInputs[msg.sender];
-        } else {
-            finalInput = input;
-        }
-        return callPrecompile(address(0x0f), finalInput);
-    }
-
     function bls12381G2MultiExp(bytes memory input) public returns (bytes memory) {
         bytes memory finalInput;
         if (pendingInputs[msg.sender].length > 0) {
@@ -89,7 +67,7 @@ contract EIP2537 {
         } else {
             finalInput = input;
         }
-        return callPrecompile(address(0x10), finalInput);
+        return callPrecompile(address(0xe), finalInput);
     }
 
     function bls12381Pairing(bytes memory input) public returns (bytes memory) {
@@ -100,7 +78,7 @@ contract EIP2537 {
         } else {
             finalInput = input;
         }
-        return callPrecompile(address(0x11), finalInput);
+        return callPrecompile(address(0xf), finalInput);
     }
 
     function bls12381MapG1(bytes memory input) public returns (bytes memory) {
@@ -111,7 +89,7 @@ contract EIP2537 {
         } else {
             finalInput = input;
         }
-        return callPrecompile(address(0x12), finalInput);
+        return callPrecompile(address(0x10), finalInput);
     }
 
     function bls12381MapG2(bytes memory input) public returns (bytes memory) {
@@ -122,6 +100,6 @@ contract EIP2537 {
         } else {
             finalInput = input;
         }
-        return callPrecompile(address(0x13), finalInput);
+        return callPrecompile(address(0x11), finalInput);
     }
 }
