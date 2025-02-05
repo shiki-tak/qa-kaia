@@ -16,24 +16,24 @@ Gas validation: PASS
 
 Data Size: 128 bytes
 Expected: 41313
-Actual: 41313
-Difference: 0
-Gas validation: PASS
+Actual: 41980
+Difference: 667
+Gas validation: FAIL
 
 Data Size: 256 bytes
 Expected: 44409
-Actual: 44409
-Difference: 0
-Gas validation: PASS
+Actual: 47100
+Difference: 2691
+Gas validation: FAIL
 
 Data Size: 512 bytes
 Expected: 50602
-Actual: 50602
-Difference: 0
-Gas validation: PASS
+Actual: 57340
+Difference: 6738
+Gas validation: FAIL
 
 Data Size: 1024 bytes
 Expected: 62987
-Actual: 62987
-Difference: 0
-Gas validation: PASS
+Actual: 77820
+Difference: 14833
+Gas validation: FAIL

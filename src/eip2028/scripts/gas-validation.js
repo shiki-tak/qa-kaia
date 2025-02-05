@@ -104,13 +104,13 @@ function calculateExpectedGas(txType, dataSize, networkName) {
   const params = GasParams[networkName];
  
   if (txType === 'accountUpdate') {
-    return params.TxGasAccountUpdate + params.AccountCreationGas;
+    return params.TxGasAccountUpdate + params.TxAccountCreationGasPerKey;
   }
   if (txType === 'feeDelegatedAccountUpdate') {
-    return params.TxGasAccountUpdate + params.AccountCreationGas + params.TxGasFeeDelegated;
+    return params.TxGasAccountUpdate + params.TxAccountCreationGasPerKey + params.TxGasFeeDelegated;
   }
   if (txType === 'feeDelegatedAccountUpdateWithRatio') {
-    return params.TxGasAccountUpdate + params.AccountCreationGas + params.TxGasFeeDelegatedWithRatio;
+    return params.TxGasAccountUpdate + params.TxAccountCreationGasPerKey + params.TxGasFeeDelegatedWithRatio;
   }
  
   if (dataSize > 0 && networkName === 'local' && !noPayloadTypes.includes(txType)) {
@@ -161,13 +161,20 @@ function calculateExpectedGas(txType, dataSize, networkName) {
       const feeDelegationCost = txType.includes('WithRatio') ? 
         params.TxGasFeeDelegatedWithRatio : 
         params.TxGasFeeDelegated;
-      return Math.max(gas + feeDelegationCost, floorDataGas);
+      // Add feeDelegationCost to both floor gas and standard gas calculation
+      return Math.max(gas + feeDelegationCost, floorDataGas + feeDelegationCost);
     } else {
       return Math.max(gas, floorDataGas);
     }
   }
  
   let gas = params.TxGas;
+ 
+  if (txType.includes('feeDelegated')) {
+    gas += txType.includes('WithRatio') ? 
+      params.TxGasFeeDelegatedWithRatio : 
+      params.TxGasFeeDelegated;
+  }
  
   return gas;
 }

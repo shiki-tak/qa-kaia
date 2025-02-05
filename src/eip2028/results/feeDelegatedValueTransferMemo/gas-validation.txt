@@ -3,37 +3,37 @@
 feeDelegatedValueTransferMemo:
 
 Data Size: 32 bytes
-Expected: 31512
-Actual: 31512
+Expected: 32280
+Actual: 32280
 Difference: 0
 Gas validation: PASS
 
 Data Size: 64 bytes
-Expected: 32024
-Actual: 32024
+Expected: 33560
+Actual: 33560
 Difference: 0
 Gas validation: PASS
 
 Data Size: 128 bytes
-Expected: 33048
-Actual: 33048
+Expected: 36120
+Actual: 36120
 Difference: 0
 Gas validation: PASS
 
 Data Size: 256 bytes
-Expected: 35096
-Actual: 35096
+Expected: 41240
+Actual: 41240
 Difference: 0
 Gas validation: PASS
 
 Data Size: 512 bytes
-Expected: 41480
-Actual: 41480
+Expected: 51480
+Actual: 51480
 Difference: 0
 Gas validation: PASS
 
 Data Size: 1024 bytes
-Expected: 61960
-Actual: 61960
+Expected: 71960
+Actual: 71960
 Difference: 0
 Gas validation: PASS
